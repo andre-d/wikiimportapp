@@ -1,3 +1,4 @@
+from BeautifulSoup import BeautifulSoup
 from flask import Flask, render_template_string, request
 import markdowner
 application = Flask(__name__)
@@ -35,9 +36,11 @@ def mainpage():
     htmlinput = request.form.get("htmlinput", "")
     mdoutput = None
     if "htmlinput" in request.form:
-        mdoutput = markdowner.markdownify(htmlinput)
+        soup = BeautifulSoup(htmlinput)
+        content = soup.find("div", {"id": "content"})
+        mdoutput = markdowner.markdownify(content or soup)
     return render_template_string(_TEMPLATE, input=htmlinput, output=mdoutput)
 
 if __name__ == "__main__":
-    # app.debug = True # DO NOT UNCOMMENT ON PRODUCTION
+    # application.debug = True # DO NOT UNCOMMENT ON PRODUCTION
     application.run()
