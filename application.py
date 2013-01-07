@@ -16,14 +16,14 @@ _TEMPLATE = """
         <h1>reddit HTML to markdown converter</h1>
         <form method="POST" class="well">
             <label for="htmlinput">Paste your html into the box below:</label> 
-            <textarea id="htmlinput" name="htmlinput" class="input-block-level" rows="5">{{ input }}</textarea>
+            <textarea id="htmlinput" name="htmlinput" class="input-block-level" rows="5">{{ input|e }}</textarea>
             <input type="submit" value="Submit" class="btn btn-primary">
         </form>
         {%- if not output is none %}
             <h1>results</h1>
             <div class="well">
                 <label for="markdownoutput">Below is your markdown output:</label> 
-                <textarea id="markdownoutput" class="input-block-level" rows="5">{{ output }}</textarea>
+                <textarea id="markdownoutput" class="input-block-level" rows="5">{{ output|e }}</textarea>
             </div>
         {%- endif %}
     </div>
