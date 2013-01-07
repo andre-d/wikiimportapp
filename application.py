@@ -1,6 +1,6 @@
 from flask import Flask, render_template_string, request
 import markdowner
-app = Flask(__name__)
+application = Flask(__name__)
 
 _TEMPLATE = """
 <!DOCTYPE HTML>
@@ -30,7 +30,7 @@ _TEMPLATE = """
 </html>
 """
 
-@app.route("/", methods=["GET", "POST"])
+@application.route("/", methods=["GET", "POST"])
 def mainpage():
     htmlinput = request.form.get("htmlinput", "")
     mdoutput = None
@@ -40,4 +40,4 @@ def mainpage():
 
 if __name__ == "__main__":
     # app.debug = True # DO NOT UNCOMMENT ON PRODUCTION
-    app.run()
+    application.run()
