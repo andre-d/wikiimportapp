@@ -99,8 +99,10 @@ class MarkDowner(object):
     def tag_A(self):
         return '[%s](%s)' % (self.default(), self.e.get('href', ''))
 
-def markdownify(html):
-    return MarkDowner(BeautifulSoup(html)).content.encode('ascii', 'xmlcharrefreplace')
+def markdownify(soup):
+    result = MarkDowner(soup).content.encode('ascii', 'xmlcharrefreplace')
+    result = '\n\n'.join(filter(None, result.split('\n')))
+    return result.strip()
 
 if __name__ == '__main__':
     original = unicode(open('input.html', 'r').read(), 'utf-8')
